@@ -9,7 +9,7 @@ pipeline{
          stage('Push Docker Image'){
             steps{
               withCredentials([string(credentialsId: 'dhub', variable: 'pass')]) {
-              sh "docker login -u 273003 -p ${pass}
+              sh "docker login -u 273003 -p ${pass}"
               sh "docker push 273003/myapp:v1"
                                                                                  }    
            
