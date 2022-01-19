@@ -3,7 +3,7 @@ pipeline{
    stages{ 
       stage('Buid Docker Image'){
          steps{
-             sh "docker build . -t 273003/myapp:v1"
+             sh "docker build . -t 273003/myapp:${BUILD_ID}"
               }
                                 } 
          stage('Push Docker Image'){
