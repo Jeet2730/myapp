@@ -16,6 +16,25 @@ pipeline{
                  }
                                    } 
 
+         stage('Deploy in Kubernetes'){
+            steps{
+                 sh "chmod +x change.sh"
+                 sh "./change.sh ${BUILD_ID}"
+               sshagent(['kops']) {
+                  sh "scp -o StrictHostKeyChecking=no mydep.yaml ubuntu@3.110.55.154:/home/ubuntu/"   
+                   script {
+                     try{
+                        sh "kubectl create -f mydep.yaml"
+                         }
+                      catch(error){     
+                         sh "kubectl apply -f mydep.yaml"
+                                  }
+                     
+                           
+                           }         
+                                  }                      
+                 }
+                                      }
          }
 
         }
