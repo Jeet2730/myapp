@@ -24,10 +24,10 @@ pipeline{
                   sh "scp -o StrictHostKeyChecking=no mydep.yaml ubuntu@3.110.55.154:/home/ubuntu/"   
                    script {
                      try{
-                        sh "kubectl create -f mydep.yaml"
+                        sh "ssh ubuntu@3.110.55.154 kubectl create -f mydep.yaml"
                          }
                       catch(error){     
-                         sh "kubectl apply -f mydep.yaml"
+                         sh "ssh ubuntu@3.110.55.154 kubectl apply -f mydep.yaml"
                                   }
                      
                            
